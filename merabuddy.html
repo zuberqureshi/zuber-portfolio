@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeraBuddy - Your Trusted Relationship Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 13px 28px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .hero-phone {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Problem Solution Section */
+        .problem-solution {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .problem-text h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .problem-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .problem-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .problem-list li::before {
+            content: '❤️';
+            position: absolute;
+            left: 0;
+            top: 0.75rem;
+        }
+
+        /* Social Community Section */
+        .social-community {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .community-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .community-content h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .community-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* App Screenshots */
+        .screenshots {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            border-left: 4px solid #667eea;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .testimonial-rating {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-period {
+            opacity: 0.7;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .pricing-card.featured .plan-features li::before {
+            color: #90EE90;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            padding: 1.5rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #667eea;
+        }
+
+        .faq-answer {
+            padding: 0 0 1.5rem 0;
+            color: #666;
+            line-height: 1.6;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon.active {
+            transform: rotate(45deg);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .download h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            background: black;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 999;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav ul li {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            /* Header Mobile */
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .cta-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            /* Hero Section Mobile */
+            .hero {
+                padding: 100px 0 50px;
+                min-height: auto;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 280px;
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+
+            .phone-mockup {
+                width: 220px;
+                height: 440px;
+                margin: 0 auto;
+            }
+
+            .phone-screen {
+                padding: 20px 15px;
+            }
+
+            /* Features Mobile */
+            .features {
+                padding: 60px 0;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+
+            /* Problem Solution Mobile */
+            .problem-solution {
+                padding: 60px 0;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .problem-text h3 {
+                font-size: 2rem;
+            }
+
+            .problem-list li {
+                font-size: 1rem;
+                text-align: left;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            /* Community Mobile */
+            .social-community {
+                padding: 60px 0;
+            }
+
+            .community-content h2 {
+                font-size: 2rem;
+            }
+
+            .community-content p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .community-features {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .community-feature {
+                padding: 1.5rem;
+            }
+
+            /* Testimonials Mobile */
+            .testimonials {
+                padding: 60px 0;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .testimonial {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+
+            /* Stats Mobile */
+            .stats {
+                padding: 50px 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            /* Pricing Mobile */
+            .pricing {
+                padding: 60px 0;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .pricing-card {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+                margin: 1rem;
+            }
+
+            .plan-price {
+                font-size: 2.5rem;
+            }
+
+            /* Screenshots Mobile */
+            .screenshots {
+                padding: 60px 0;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .screenshot {
+                margin: 0 1rem;
+            }
+
+            .screenshot-img {
+                height: 300px;
+            }
+
+            /* FAQ Mobile */
+            .faq {
+                padding: 60px 0;
+            }
+
+            .faq-container {
+                margin: 0 1rem;
+            }
+
+            .faq-question {
+                padding: 1rem 0;
+                font-size: 1rem;
+            }
+
+            .faq-answer {
+                font-size: 0.95rem;
+                padding: 0 0 1rem 0;
+            }
+
+            /* Download Mobile */
+            .download {
+                padding: 60px 0;
+            }
+
+            .download h2 {
+                font-size: 2rem;
+                padding: 0 1rem;
+            }
+
+            .download p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 0 1rem;
+            }
+
+            .store-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+
+            /* Footer Mobile */
+            footer {
+                padding: 2rem 0 1rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Extra Small Mobile */
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .phone-mockup {
+                width: 200px;
+                height: 400px;
+            }
+
+            .feature-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .testimonial {
+                padding: 1rem;
+                margin: 0 0.5rem;
+            }
+
+            .pricing-card {
+                padding: 1.5rem 1rem;
+                margin: 0 0.5rem;
+            }
+
+            .community-feature {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Tablet Responsive */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-content {
+                gap: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .pricing-card:nth-child(3) {
+                grid-column: 1 / -1;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .community-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">MeraBuddy</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="#download" class="cta-btn">Get Started</a>
+        </nav>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="#features" onclick="closeMobileMenu()">Features</a></li>
+                <li><a href="#community" onclick="closeMobileMenu()">Community</a></li>
+                <li><a href="#pricing" onclick="closeMobileMenu()">Pricing</a></li>
+                <li><a href="#faq" onclick="closeMobileMenu()">FAQ</a></li>
+                <li><a href="#download" onclick="closeMobileMenu()">Download</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Your Trusted Relationship Companion</h1>
+                    <p>Navigate love, intimacy, and relationships with confidence. Get expert guidance, connect anonymously, and build stronger connections with MeraBuddy.</p>
+                    <div class="hero-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.merabuddy.zs&pli=1" class="btn-primary">
+                            📱 Download Now
+                        </a>
+                        <a href="#features" class="btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-phone">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <h3 style="color: #333; margin-bottom: 1rem;">MeraBuddy</h3>
+                            <p style="color: #666; font-size: 0.9rem;">Your safe space for relationship guidance and support</p>
+                            <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; width: 100%;">
+                                <div style="background: #667eea; color: white; padding: 0.75rem; border-radius: 10px; font-size: 0.8rem;">💕 Relationship Support</div>
+                                <div style="background: #764ba2; color: white; padding: 0.75rem; border-radius: 10px; font-size: 0.8rem;">🤝 Anonymous Community</div>
+                                <div style="background: #667eea; color: white; padding: 0.75rem; border-radius: 10px; font-size: 0.8rem;">❤️ Expert Guidance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need for Healthy Relationships</h2>
+                <p>From newlyweds to dating couples, get personalized support for every relationship challenge</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💑</div>
+                    <h3>Relationship Guidance</h3>
+                    <p>Expert advice for newlyweds, couples facing intimacy issues, and those navigating relationship challenges with compassionate, professional support.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌹</div>
+                    <h3>Sexual Health Support</h3>
+                    <p>Safe, confidential guidance on sexual wellness, intimacy concerns, and building healthy physical relationships with your partner.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💝</div>
+                    <h3>Proposal & Dating Help</h3>
+                    <p>Get confidence-boosting advice for proposing to your girlfriend, planning romantic gestures, and navigating the dating world successfully.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Issues</h3>
+                    <p>Navigate complex family dynamics, in-law relationships, and family planning decisions with expert guidance and community support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Solution Section -->
+    <section class="problem-solution">
+        <div class="container">
+            <div class="problem-grid">
+                <div class="problem-text">
+                    <h3>Don't Navigate Love Alone</h3>
+                    <p style="color: #666; margin-bottom: 2rem; font-size: 1.1rem;">Relationships are beautiful but complex. Many couples struggle with communication, intimacy, and understanding each other's needs.</p>
+                    <ul class="problem-list">
+                        <li>Newly married couples facing adjustment challenges</li>
+                        <li>Partners struggling with sexual intimacy and communication</li>
+                        <li>Singles nervous about proposing to their girlfriends</li>
+                        <li>Couples dealing with family pressure and expectations</li>
+                        <li>Anyone needing relationship advice but feeling too shy to ask</li>
+                    </ul>
+                    <p style="color: #667eea; font-weight: 600; font-size: 1.1rem;">MeraBuddy provides the safe, judgment-free support you need.</p>
+                </div>
+                <div class="hero-phone">
+                    <div class="phone-mockup" style="width: 280px; height: 560px;">
+                        <div class="phone-screen">
+                            <h4 style="color: #333; margin-bottom: 1rem;">Safe & Anonymous</h4>
+                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 10px; margin-bottom: 1rem; text-align: left;">
+                                <p style="color: #333; font-size: 0.8rem; margin-bottom: 0.5rem;"><strong>Anonymous User:</strong></p>
+                                <p style="color: #666; font-size: 0.75rem;">"Need advice about talking to my girlfriend about marriage. Feeling nervous..."</p>
+                            </div>
+                            <div style="background: #667eea; color: white; padding: 1rem; border-radius: 10px; text-align: left;">
+                                <p style="font-size: 0.8rem; margin-bottom: 0.5rem;"><strong>Expert Response:</strong></p>
+                                <p style="font-size: 0.75rem;">"It's natural to feel nervous about such an important conversation. Here are some gentle ways to approach the topic..."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Community Section -->
+    <section class="social-community" id="community">
+        <div class="container">
+            <div class="community-content">
+                <h2>Anonymous Social Community</h2>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">Share your thoughts, seek advice, and connect with others without revealing your identity. Create a supportive environment where everyone feels safe to open up.</p>
+                
+                <div class="community-features">
+                    <div class="community-feature">
+                        <h3 style="margin-bottom: 1rem;">🎭 Complete Anonymity</h3>
+                        <p>Post messages, share experiences, and ask questions without anyone knowing who you are. Your privacy is our priority.</p>
+                    </div>
+                    <div class="community-feature">
+                        <h3 style="margin-bottom: 1rem;">🤝 Peer Support</h3>
+                        <p>Connect with others facing similar challenges. Sometimes the best advice comes from someone who's been there.</p>
+                    </div>
+                    <div class="community-feature">
+                        <h3 style="margin-bottom: 1rem;">🛡️ Safe Space</h3>
+                        <p>Moderated community with strict guidelines ensuring respectful, supportive interactions for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Users Say</h2>
+                <p>Real stories from couples and individuals who found support through MeraBuddy</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"MeraBuddy helped me overcome my nervousness about proposing to my girlfriend. The anonymous advice gave me confidence and the perfect proposal plan!"</p>
+                    <p class="testimonial-author">- Anonymous User, Mumbai</p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"As newlyweds, we struggled with intimacy issues. The expert guidance and community support helped us communicate better and strengthen our bond."</p>
+                    <p class="testimonial-author">- Anonymous Couple, Delhi</p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"The anonymous community is amazing. I could share my family relationship problems without judgment and got practical advice from people who understood."</p>
+                    <p class="testimonial-author">- Anonymous User, Bangalore</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Conversations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Support Plan</h2>
+                <p>Flexible pricing options to match your relationship journey needs</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Basic Support</div>
+                    <div class="plan-price">Free</div>
+                    <div class="plan-period">Forever</div>
+                    <ul class="plan-features">
+                        <li>Anonymous community access</li>
+                        <li>Basic relationship articles</li>
+                        <li>Public forum discussions</li>
+                        <li>Community peer support</li>
+                    </ul>
+                    <a href="#download" class="cta-btn" style="background: #667eea;">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="plan-name">Premium Buddy</div>
+                    <div class="plan-price">₹299</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li>Everything in Basic</li>
+                        <li>1-on-1 expert consultations</li>
+                        <li>Priority support responses</li>
+                        <li>Personalized guidance plans</li>
+                        <li>Video call sessions</li>
+                        <li>Private messaging with experts</li>
+                    </ul>
+                    <a href="#download" class="cta-btn" style="background: white; color: #667eea;">Start Premium</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Couple's Plan</div>
+                    <div class="plan-price">₹499</div>
+                    <div class="plan-period">per month</div>
+                    <ul class="plan-features">
+                        <li>Everything in Premium</li>
+                        <li>Joint couple sessions</li>
+                        <li>Relationship assessments</li>
+                        <li>Custom exercise plans</li>
+                        <li>Progress tracking</li>
+                        <li>Emergency support hotline</li>
+                    </ul>
+                    <a href="#download" class="cta-btn" style="background: #667eea;">Choose Couple's</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="support">
+        <div class="container">
+            <div class="section-header">
+                <h2>Designed for Your Privacy & Comfort</h2>
+                <p>Intuitive interface that makes seeking help feel natural and stress-free</p>
+            </div>
+            <div class="screenshots-grid">
+                <div class="screenshot">
+                    <div class="screenshot-img">
+                        <div style="text-align: center;">
+                            <h4>Expert Chat</h4>
+                            <p style="margin-top: 0.5rem; opacity: 0.8;">1-on-1 guidance</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-img">
+                        <div style="text-align: center;">
+                            <h4>Community Feed</h4>
+                            <p style="margin-top: 0.5rem; opacity: 0.8;">Anonymous posts</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-img">
+                        <div style="text-align: center;">
+                            <h4>Resource Library</h4>
+                            <p style="margin-top: 0.5rem; opacity: 0.8;">Educational content</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Get answers to common questions about MeraBuddy</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is my privacy really protected on MeraBuddy?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, absolutely! We use end-to-end encryption and never store personal information that could identify you. All conversations are anonymous, and our experts are bound by strict confidentiality agreements.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Are the relationship experts qualified professionals?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        All our experts are licensed counselors, therapists, and relationship coaches with years of experience. They undergo thorough background checks and continuous training to provide the best support.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I use MeraBuddy with my partner?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! Our Couple's Plan is specifically designed for partners who want to work together. You can have joint sessions, shared assessments, and synchronized progress tracking.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if I'm not satisfied with the service?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        We offer a 30-day money-back guarantee for all premium plans. If you're not completely satisfied, we'll refund your subscription, no questions asked.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How quickly can I get help when I need it?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Our community is active 24/7, and premium users typically receive expert responses within 2-4 hours. Emergency support is available for urgent situations.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is MeraBuddy suitable for all types of relationships?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We support all relationship types including dating, engaged, married, and LGBTQ+ couples. Our experts are trained to provide inclusive, culturally sensitive guidance for everyone.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <h2>Start Your Journey Today</h2>
+            <p style="font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9;">Join thousands of couples and individuals who've found support, guidance, and confidence through MeraBuddy.</p>
+            <div class="download-buttons">
+                <a href="https://play.google.com/store/apps/details?id=com.merabuddy.zs&pli=1" class="store-btn">
+                    <span style="font-size: 1.5rem;">📱</span>
+                    <div>
+                        <div style="font-size: 0.8rem;">Get it on</div>
+                        <div style="font-weight: bold;">Google Play</div>
+                    </div>
+                </a>
+                <a href="#" class="store-btn" style="opacity: 0.7;">
+                    <span style="font-size: 1.5rem;">🍎</span>
+                    <div>
+                        <div style="font-size: 0.8rem;">Download on the</div>
+                        <div style="font-weight: bold;">App Store</div>
+                    </div>
+                </a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.7;">Free to download • Anonymous & Secure • Expert Support</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white; margin-bottom: 1rem;">MeraBuddy</div>
+                <p style="color: #ccc; margin-bottom: 2rem;">Your trusted companion for relationship guidance and support</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#">Support</a>
+                    <a href="#">Contact</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #333; padding-top: 1rem; color: #666;">
+                <p>&copy; 2025 MeraBuddy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const toggleButton = document.querySelector('.mobile-menu-toggle');
+            
+            if (!mobileNav.contains(event.target) && !toggleButton.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        // FAQ Toggle functionality
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.faq-icon');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.classList.remove('active');
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-icon').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked FAQ
+                answer.classList.add('active');
+                icon.classList.add('active');
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation classes on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

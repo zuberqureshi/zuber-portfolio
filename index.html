@@ -1,1392 +1,1079 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Zuber Qureshi | Full Stack Developer | React, Web3, AI, Blockchain
-</title>
-  <meta name="description" content="Zuber Qureshi - Experienced Web3 & Full Stack Developer skilled in blockchain, smart contracts, React.js, Node.js, and PHP. Specializing in modern web solutions and decentralized applications (dApps).">
-  <meta name="keywords" content="Zuber Qureshi, Web3 Developer, Full Stack Developer, Blockchain Developer, Smart Contracts, React.js, Node.js, PHP, dApps, Ethereum, Solidity, Web Development">
-  <meta name="google-site-verification" content="lA5gxf9bwj1XVDUr5GLsMF_83UY60M-kZfSsz_98cY4" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .bg-animation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(120, 198, 255, 0.1) 0%, transparent 50%);
-            animation: bgMove 20s ease-in-out infinite;
-        }
-
-        @keyframes bgMove {
-            0%, 100% { transform: translate(-25%, -25%) rotate(0deg); }
-            50% { transform: translate(-35%, -15%) rotate(180deg); }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #4ecdc4;
-            transform: translateY(-2px);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 0 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .hero .description {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3rem;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Sections */
-        .section {
-            padding: 1rem 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 4rem;
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            border-radius: 20px;
-            z-index: -1;
-        }
-
-        .profile-img {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 20px;
-            background: linear-gradient(45deg, #333, #666);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .about-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #4ecdc4;
-        }
-
-        .about-content p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1.5rem;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #4ecdc4;
-            display: block;
-        }
-
-        .stat-label {
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 0.5rem;
-        }
-
-        /* Experience Section */
-        .experience-timeline {
-            position: relative;
-            margin: 3rem 0;
-        }
-
-        .experience-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #ff6b6b, #4ecdc4, #45b7d1);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin: 3rem 0;
-            width: 100%;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 55%;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 55%;
-            text-align: left;
-        }
-
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 2rem;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            border: 4px solid rgba(15, 15, 35, 1);
-        }
-
-        .timeline-year {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .timeline-company {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #4ecdc4;
-            margin: 0.5rem 0;
-        }
-
-        .timeline-role {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .skill-category {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .skill-category h4 {
-            font-size: 1.3rem;
-            color: #4ecdc4;
-            margin-bottom: 1rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: linear-gradient(45deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2));
-            color: rgba(255, 255, 255, 0.9);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .project-header {
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #4ecdc4;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-company {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-description {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1.5rem;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(69, 183, 209, 0.2);
-            color: #45b7d1;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(69, 183, 209, 0.3);
-        }
-
-        /* Education Section */
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .education-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .education-icon {
-            font-size: 3rem;
-            color: #4ecdc4;
-            margin-bottom: 1rem;
-        }
-
-        .education-degree {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #4ecdc4;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-institution {
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0.5rem;
-        }
-
-        .education-note {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .contact-item a {
-            color: #4ecdc4;
-            text-decoration: none;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(15, 15, 35, 0.9);
-            padding: 3rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #4ecdc4;
-            transform: translateY(-3px);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Scroll animations */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                margin: 0 2rem;
-                text-align: left;
-            }
-
-            .experience-timeline::before {
-                left: 2rem;
-            }
-
-            .timeline-dot {
-                left: 2rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .section {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                margin: 0 1rem;
-            }
-
-            .experience-timeline::before {
-                left: 1rem;
-            }
-
-            .timeline-dot {
-                left: 1rem;
-            }
-        }
-    </style>
-
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DNRNXRES2Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DNRNXRES2Q');
-</script>
-
+  </title>
+  <meta name="description"
+    content="Zuber Qureshi - Experienced Web3 &amp; Full Stack Developer skilled in blockchain, smart contracts, React.js, Node.js, and PHP. Specializing in modern web solutions and decentralized applications (dApps).">
+  <meta name="keywords"
+    content="Zuber Qureshi, Web3 Developer, Full Stack Developer, Blockchain Developer, Smart Contracts, React.js, Node.js, PHP, dApps, Ethereum, Solidity, Web Development">
+  <meta name="google-site-verification" content="lA5gxf9bwj1XVDUr5GLsMF_83UY60M-kZfSsz_98cY4">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <meta property="og:title" content="Zuber Qureshi | Web3 &amp; Full Stack Developer | React, Node.js, PHP, Blockchain">
+  <meta property="og:description"
+    content="Experienced Web3 &amp; Full Stack Developer specializing in blockchain, smart contracts, and modern web technologies like React.js, Node.js, and PHP.">
+  <meta property="og:image" content="https://zuberqureshi.com/assets/img/zuber-profile-photo.jpg">
+  <meta property="og:url" content="https://zuberqureshi.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zuber Qureshi | Web3 &amp; Full Stack Developer">
+  <meta name="twitter:description" content="Expert in Web3, Blockchain, React.js, Node.js, PHP, and dApps development.">
+  <meta name="twitter:image" content="https://zuberqureshi.com/assets/img/zuber-profile-photo.jpg">
+
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-DNRNXRES2Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DNRNXRES2Q');
+  </script>
+
+  <style>
+    .float-whatsapp {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 40px;
+      right: 40px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 3px #999;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .float-whatsapp:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+  </style>
 
 </head>
-<body>
-    <div class="bg-animation"></div>
 
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <div class="logo">Zuber Qureshi</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+<body class="index-page" data-aos-easing="ease-in-out" data-aos-duration="600" data-aos-delay="0">
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Zuber Qureshi</h1>
-            <p class="subtitle">Tech Leader • Full Stack Developer </p>
-            <p class="description">
-                Transforming ideas into scalable solutions. From startup founder to enterprise tech lead, 
-                I build teams and products that drive business growth through innovative technology.
-            </p>
-            <div class="cta-buttons">
-                <a href="http://wa.me/+919039730708" class="btn btn-primary">Let's Connect</a>
-                <a href="#projects" class="btn btn-secondary">View My Work</a>
-            </div>
-        </div>
-    </section>
+  <header id="header" class="header dark-background d-flex flex-column">
+    <i class="header-toggle d-xl-none bi bi-list"></i>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2 class="section-title animate-on-scroll">About Me</h2>
-        <div class="about-grid animate-on-scroll">
-            <div class="about-image">
-                <img src="https://zuberqureshi.com/assets/img/zuber-profile-photo.jpg" class="profile-img">
-            </div>
-            <div class="about-content">
-                <h3>Full Stack Developer & Tech Leader</h3>
-                <p>
-                    With over 8 years of experience in software development, I've evolved from a passionate 
-                    developer to a strategic tech leader. My journey spans from building million-download 
-                    applications to leading cross-functional teams in healthcare, mobile, and enterprise solutions.
-                </p>
-                <p>
-                    I specialize in end-to-end product development, from stakeholder engagement to deployment, 
-                    with expertise in modern web technologies, AI integration, and microservices architecture. 
-                    My leadership philosophy combines technical excellence with team empowerment.
-                </p>
-                <p>
-                    <strong>What sets me apart:</strong> I don't just write code – I build products, lead teams, 
-                    and drive business outcomes through technology innovation.
-                </p>
-            </div>
-        </div>
+    <div class="profile-img">
+      <img src="assets/img/zuber-profile-photo.jpg" alt="zuber qureshi" class="img-fluid rounded-circle">
+    </div>
 
-        <div class="stats-grid animate-on-scroll">
-            <div class="stat-card">
-                <span class="stat-number">8+</span>
-                <span class="stat-label">Years Experience</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">20+</span>
-                <span class="stat-label">Projects Delivered</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">10+</span>
-                <span class="stat-label">Teams Led</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number">1M+</span>
-                <span class="stat-label">App Downloads</span>
-            </div>
-        </div>
-    </section>
+    <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <!-- <img src="assets/img/logo.png" alt=""> -->
+      <h1 class="sitename">Zuber Qureshi | Web3 &amp; Full Stack Developer</h1> <!-- H1 for primary keyword -->
+    </a>
 
-    <!-- Experience Section -->
-    <section id="experience" class="section">
-        <h2 class="section-title animate-on-scroll">Professional Journey</h2>
-        <div class="experience-timeline">
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-year">2023 - Present</div>
-                    <div class="timeline-company">Sushain AppTech</div>
-                    <div class="timeline-role"> Project Manager </div>
-                    <div class="timeline-description">
-                        Built a comprehensive healthcare platform from ground up featuring video consultations, 
-                        medicine delivery, inventory management, and financial reporting. Led product strategy, 
-                        team management, and stakeholder relationships across design, marketing, and development teams.
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-year">2022 - 2023</div>
-                    <div class="timeline-company">Priya Soft Web</div>
-                    <div class="timeline-role">Technical Analyst  </div>
-                    <div class="timeline-description">
-                        Led frontend development for IoT-based projects (Avnet), B2B commerce portals, and 
-                        T-Mobile's incident record system. Managed technical architecture decisions and 
-                        mentored junior developers while ensuring scalable, enterprise-grade solutions.
-                    </div>
-                </div>
-            </div>
-
-            <div class="timeline-item animate-on-scroll">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-year">2017 - 2020</div>
-                    <div class="timeline-company">AppTech Solutions</div>
-                    <div class="timeline-role">Full Stack Developer → Project Lead</div>
-                    <div class="timeline-description">
-                        Developed backend systems for Arc Launcher (1M+ downloads) and led the Lava Mobile 
-                        project after promotion. Gained extensive experience in Android ecosystem, backend 
-                        optimization, and project management methodologies.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <h2 class="section-title animate-on-scroll">Technical Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-category animate-on-scroll">
-                <h4>🚀 Leadership & Strategy</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Team Leadership</span>
-                    <span class="skill-tag">Product Strategy</span>
-                    <span class="skill-tag">Stakeholder Management</span>
-                    <span class="skill-tag">Project Management</span>
-                    <span class="skill-tag">Technical Architecture</span>
-                </div>
-            </div>
-
-            <div class="skill-category animate-on-scroll">
-                <h4>💻 Full Stack Development</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">React.js</span>
-                    <span class="skill-tag">Node.js</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">PHP</span>
-                    <span class="skill-tag">Microservices</span>
-                    <span class="skill-tag">REST APIs</span>
-                </div>
-            </div>
-
-            <div class="skill-category animate-on-scroll">
-                <h4>🤖 AI & Emerging Tech</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Blockchain</span>
-                    <span class="skill-tag">AI Agents</span>
-                    <span class="skill-tag">Generative AI</span>
-                    <span class="skill-tag">IoT Integration</span>
-                </div>
-            </div>
-
-            <div class="skill-category animate-on-scroll">
-                <h4>🛠 DevOps & Infrastructure</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Server Management</span>
-                    <span class="skill-tag">App Deployment</span>
-                    <span class="skill-tag">Play Store Management</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">Cloud Services</span>
-                </div>
-            </div>
-
-            <div class="skill-category animate-on-scroll">
-                <h4>🔗 Integrations & APIs</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Payment Gateways</span>
-                    <span class="skill-tag">SMS/Email APIs</span>
-                    <span class="skill-tag">WhatsApp Integration</span>
-                    <span class="skill-tag">Google Analytics</span>
-                    <span class="skill-tag">Meta Pixel</span>
-                    <span class="skill-tag">Microsoft Clarity</span>
-                </div>
-            </div>
-
-            <div class="skill-category animate-on-scroll">
-                <h4>📱 Mobile & Cross-Platform</h4>
-                <div class="skill-tags">
-                    <span class="skill-tag">Android Development</span>
-                    <span class="skill-tag">React Native</span>
-                    <span class="skill-tag">Mobile App Architecture</span>
-                    <span class="skill-tag">Play Store Optimization</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2 class="section-title animate-on-scroll">Key Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <div class="project-title">Healthcare Platform</div>
-                    <div class="project-company">Sushain AppTech</div>
-                </div>
-                <div class="project-content">
-                    <div class="project-description">
-                        Comprehensive healthcare ecosystem with video consultations, door-to-door medicine delivery, 
-                        inventory management, and integrated financial reporting. Led full product lifecycle from 
-                        concept to deployment.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Video APIs</span>
-                        <span class="tech-tag">Payment Integration</span>
-                        <span class="tech-tag">Inventory System</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <div class="project-title">Arc Launcher Backend</div>
-                    <div class="project-company">AppTech Solutions</div>
-                </div>
-                <div class="project-content">
-                    <div class="project-description">
-                        Backend infrastructure for Android launcher with 1M+ downloads on Play Store. 
-                        Optimized for high performance, scalability, and seamless user experience across 
-                        millions of active devices.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">PHP</span>
-                        <span class="tech-tag">MySQL</span>
-                        <span class="tech-tag">Android APIs</span>
-                        <span class="tech-tag">Performance Optimization</span>
-                        <span class="tech-tag">Scalable Architecture</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <div class="project-title">T-Mobile Incident System</div>
-                    <div class="project-company">Proiya Soft Web</div>
-                </div>
-                <div class="project-content">
-                    <div class="project-description">
-                        Enterprise-level incident record and ticket management system for T-Mobile. 
-                        Handled high-volume data processing with real-time updates and comprehensive 
-                        reporting capabilities.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Enterprise APIs</span>
-                        <span class="tech-tag">Real-time Updates</span>
-                        <span class="tech-tag">Data Analytics</span>
-                        <span class="tech-tag">Security Compliance</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <div class="project-title">Avnet B2B Commerce Portal</div>
-                    <div class="project-company">Proiya Soft Web</div>
-                </div>
-                <div class="project-content">
-                    <div class="project-description">
-                        B2B e-commerce platform with IoT integration for Avnet. Features complex product 
-                        catalogs, bulk ordering systems, and real-time inventory management with IoT device 
-                        connectivity.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">IoT Integration</span>
-                        <span class="tech-tag">E-commerce</span>
-                        <span class="tech-tag">Inventory Management</span>
-                        <span class="tech-tag">B2B Solutions</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <div class="project-title">Lava Mobile Platform</div>
-                    <div class="project-company">AppTech Solutions</div>
-                </div>
-                <div class="project-content">
-                    <div class="project-description">
-                        Led the development of Lava Mobile's digital platform, managing cross-functional teams 
-                        and ensuring seamless integration with mobile hardware ecosystems. Promoted to project 
-                        lead based on exceptional performance.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">Mobile Integration</span>
-                        <span class="tech-tag">Team Leadership</span>
-                        <span class="tech-tag">Hardware APIs</span>
-                        <span class="tech-tag">Cross-platform</span>
-                        <span class="tech-tag">Project Management</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <div class="project-title">Multi-Industry Solutions</div>
-                    <div class="project-company">Various Clients</div>
-                </div>
-                <div class="project-content">
-                    <div class="project-description">
-                        Diverse portfolio spanning co-working spaces, healthcare, mobile industry, and 
-                        B2B/B2C e-commerce. Each solution tailored to specific industry requirements with 
-                        scalable architecture and modern tech stack.
-                    </div>
-                    <div class="project-tech">
-                        <span class="tech-tag">Full Stack</span>
-                        <span class="tech-tag">Multi-Industry</span>
-                        <span class="tech-tag">Scalable Solutions</span>
-                        <span class="tech-tag">Custom Development</span>
-                        <span class="tech-tag">Business Logic</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="section">
-        <h2 class="section-title animate-on-scroll">Education & Achievements</h2>
-        <div class="education-grid">
-            <div class="education-card animate-on-scroll">
-                <div class="education-icon">🎓</div>
-                <div class="education-degree">B.Tech Computer Science</div>
-                <div class="education-institution">Sri Ram College</div>
-                <div class="education-note">Specialized in Software Engineering & System Architecture</div>
-            </div>
-
-            <div class="education-card animate-on-scroll">
-                <div class="education-icon">🏆</div>
-                <div class="education-degree">JEE Qualified</div>
-                <div class="education-institution">Joint Entrance Examination</div>
-                <div class="education-note">Cleared India's most competitive engineering entrance exam</div>
-            </div>
-
-            <div class="education-card animate-on-scroll">
-                <div class="education-icon">🎖️</div>
-                <div class="education-degree">Secondary Education</div>
-                <div class="education-institution">Rashtriya Military School, Tekanpur Gwalior</div>
-                <div class="education-note">Premier paramilitary institution known for discipline & excellence</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2 class="section-title animate-on-scroll">Let's Build Something Amazing</h2>
-        <div class="contact-content animate-on-scroll">
-            <p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">
-                Ready to transform your business with innovative technology solutions? 
-                I'm available for CTO roles, technical leadership positions, and co-founder opportunities.
-            </p>
-            
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span>📧</span>
-                    <a href="mailto:zuberqureshi95@gmail.com">zuber.qureshi@tech.com</a>
-                </div>
-                <div class="contact-item">
-                    <span>📱</span>
-                    <a href="tel:+919999999999">+91 9039730708 </a>
-                </div>
-                <div class="contact-item">
-                    <span>📍</span>
-                    <span>Available Globally</span>
-                </div>
-            </div>
-
-            <div class="cta-buttons" style="margin-top: 2rem;">
-                <a href="mailto:zuberqureshi95@gmail.com" class="btn btn-primary">Get In Touch</a>
-                <a href="https://www.linkedin.com/in/zuberqureshi95/" class="btn btn-secondary">Download Resume</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="section">
-            <div class="social-links">
-
+    <div class="social-links text-center">
       <a href="https://x.com/zuberqu28629967" class="twitter"><i class="bi bi-twitter-x"></i></a>
       <a href="https://www.facebook.com/zuberqureshi0786/" class="facebook"><i class="bi bi-facebook"></i></a>
       <a href="https://www.instagram.com/zuberqureshi786/?utm_source=ig_web_button_share_sheet" class="instagram"><i
           class="bi bi-instagram"></i></a>
       <a href="skype:live:2273cb415093031?chat" class="google-plus"><i class="bi bi-skype"></i></a>
       <a href="https://www.linkedin.com/in/zuberqureshi95/" class="linkedin"><i class="bi bi-linkedin"></i></a>
-       
-            </div>
-                 <p style="color: rgba(255, 255, 255, 0.6);" >© <span>Copyright</span> <strong class="px-1 sitename">Zuber  </strong> <span>All Rights Reserved</span>
+    </div>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="#hero" class=""><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="#about" class=""><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="#skills" class=""><i class="bi bi-file-earmark-text navicon"></i> Skills</a></li>
+
+        <li><a href="#resume" class="active"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="#portfolio" class=""><i class="bi bi-images navicon"></i> Portfolio</a></li>
+        <!-- <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li> -->
+        <!-- <li class="dropdown"><a href="#"><i class="bi bi-menu-button navicon"></i> <span>Dropdown</span>
+           <i class="bi bi-chevron-down toggle-dropdown"></i>
+          </a>
+          <ul>
+            <li><a href="#">Dropdown 1</a></li>
+            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> 
+              <i class="bi bi-chevron-down toggle-dropdown"></i>
+            </a>
+              <ul>
+                <li><a href="#">Deep Dropdown 1</a></li>
+                <li><a href="#">Deep Dropdown 2</a></li>
+                <li><a href="#">Deep Dropdown 3</a></li>
+                <li><a href="#">Deep Dropdown 4</a></li>
+                <li><a href="#">Deep Dropdown 5</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Dropdown 2</a></li>
+            <li><a href="#">Dropdown 3</a></li>
+            <li><a href="#">Dropdown 4</a></li>
+          </ul>
+        </li> -->
+        <li><a href="#contact" class=""><i class="bi bi-envelope navicon"></i> Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background  ">
+
+      <img src="assets/img/Protein.jpg" alt="zuber qureshi" data-aos="fade-in" class="aos-init aos-animate">
+
+      <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+        <h2>Senior Full Stack &amp; Blockchain Developer</h2> <!-- H2 for secondary keyword -->
+        <p>I'm <span class="typed" data-typed-items=" Building the future with  Node React PHP">Building</span><span
+            class="typed-cursor" aria-hidden="true">|</span><span class="typed-cursor typed-cursor--blink"
+            aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>About</h2>
+        <p>
+          As a <b> JEE-qualified (Top 1%) Full Stack Developer</b>, I specialize in building platforms from scratch for
+          startups, overseeing the entire app and web development process—from planning and design to deployment. With
+          expertise in <b>Web3.js, Blockchain, Node.js, React.js, and PHP</b>, I create high-performance, scalable
+          solutions tailored to business needs. Whether developing decentralized applications (dApps) or robust web
+          platforms, I ensure seamless functionality and efficiency.
         </p>
-        <a href="zuber_tnc.pdf" target="_blank"> Term of Use </a> & <a href="zuber_refund.pdf" target="_blank">  Refund Policy  </a>
-    
 
-            <!-- <p style="color: rgba(255, 255, 255, 0.6);">
-                © 2025 Zuber Qureshi. Crafted with passion for innovation.
-            </p> -->
+      </div><!-- End Section Title -->
+
+      <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="assets/img/zuber-profile-photo.jpg" class="img-fluid" alt="zuber qureshi">
+          </div>
+          <div class="col-lg-8 content">
+            <h1>Expert Full Stack Developer | Web3.js, React.js, Node.js &amp; Blockchain</h1>
+
+            <p class="fst-italic py-3">
+              With a proven track record in <b>e-commerce, healthcare, and financial tech,</b> I specialize in building
+              seamless user experiences and optimized code. Skilled in leading cross-functional teams, mentoring junior
+              developers, and collaborating with design, product, and QA to deliver innovative solutions. </p>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>7 June 1995</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span> https://zuberqureshi.com/
+                    </span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+91 90397 30708</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Gwalior, Madhya Pradesh</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span> Master in Computer Science
+                    </span></li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>zuberqureshi95@gmail.com</span>
+                  </li>
+                  <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="py-3">
+              As a skilled developer, I excel in ReactJS, NodeJS, PHP, and JavaScript, focusing on scalable web
+              platforms, API design, and microservices architecture. Proficient in TDD and BDD methodologies,
+              I ensure high-quality code and seamless deployments using AWS and CI/CD pipelines. </p>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+      </div>
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(15, 15, 35, 0.95)';
-            } else {
-                navbar.style.background = 'rgba(15, 15, 35, 0.9)';
-            }
-        });
+    </section><!-- /About Section -->
 
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    <!-- Stats Section -->
+    <section id="stats" class="stats d-none section">
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animated');
-                }
-            });
-        }, observerOptions);
+      <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
+        <div class="row gy-4">
 
-        // Mobile menu toggle
-        const mobileToggle = document.querySelector('.mobile-menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+          <div class="col-lg-3 col-md-6">Professional
+            <div class="stats-item">
+              <i class="bi bi-emoji-smile"></i>
+              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+                class="purecounter">0</span>
+              <p><strong>Happy Clients</strong> <span>consequuntur quae</span></p>
+            </div>
+          </div><!-- End Stats Item -->
 
-        mobileToggle.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.width = '100%';
-            navLinks.style.background = 'rgba(15, 15, 35, 0.95)';
-            navLinks.style.padding = '1rem';
-        });
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-journal-richtext"></i>
+              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+                class="purecounter">0</span>
+              <p><strong>Projects</strong> <span>adipisci atque cum quia aut</span></p>
+            </div>
+          </div><!-- End Stats Item -->
 
-        // Typing animation for hero subtitle
-        const subtitle = document.querySelector('.hero .subtitle');
-        const titles = [
-            'Tech Leader • Full Stack Developer • CTO',
-            'Building the Future • One Line at a Time',
-            'From Startup to Scale • Leading Innovation'
-        ];
-        let titleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-headset"></i>
+              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1"
+                class="purecounter">0</span>
+              <p><strong>Hours Of Support</strong> <span>aut commodi quaerat</span></p>
+            </div>
+          </div><!-- End Stats Item -->
 
-        function typeAnimation() {
-            const currentTitle = titles[titleIndex];
-            
-            if (!isDeleting) {
-                subtitle.textContent = currentTitle.slice(0, charIndex + 1);
-                charIndex++;
-                
-                if (charIndex === currentTitle.length) {
-                    setTimeout(() => isDeleting = true, 2000);
-                }
-            } else {
-                subtitle.textContent = currentTitle.slice(0, charIndex);
-                charIndex--;
-                
-                if (charIndex === 0) {
-                    isDeleting = false;
-                    titleIndex = (titleIndex + 1) % titles.length;
-                }
-            }
-            
-            setTimeout(typeAnimation, isDeleting ? 50 : 100);
-        }
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item">
+              <i class="bi bi-people"></i>
+              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1"
+                class="purecounter">0</span>
+              <p><strong>Hard Workers</strong> <span>rerum asperiores dolor</span></p>
+            </div>
+          </div><!-- End Stats Item -->
 
-        // Start typing animation after page load
-        setTimeout(typeAnimation, 1000);
+        </div>
 
-        // Stats counter animation
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-number');
-            stats.forEach(stat => {
-                const target = parseInt(stat.textContent);
-                const increment = target / 100;
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        stat.textContent = stat.textContent; // Keep original format
-                        clearInterval(timer);
-                    } else {
-                        stat.textContent = Math.floor(current) + (stat.textContent.includes('+') ? '+' : '');
-                    }
-                }, 20);
-            });
-        }
+      </div>
 
-        // Trigger stats animation when about section is visible
-        const aboutSection = document.getElementById('about');
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    statsObserver.unobserve(aboutSection);
-                }
-            });
-        }, { threshold: 0.5 });
+    </section><!-- /Stats Section -->
 
-        statsObserver.observe(aboutSection);
+    <!-- Skills Section -->
+    <section id="skills" class="skills section light-background">
 
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.transform = `translateY(${rate}px)`;
-            }
-        });
+      <!-- Section Title -->
+      <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Skills</h2>
+        <p>
+          Senior Web Developer with 6+ years of experience in Full-Stack Development, React, Node.js, PHP, and Web3.
+          Passionate about building scalable, high-performance, and blockchain-integrated solutions
+        </p>
+      </div><!-- End Section Title -->
 
-        // Add glow effect to project cards on hover
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 20px 40px rgba(78, 205, 196, 0.3)';
-                this.style.borderColor = 'rgba(78, 205, 196, 0.5)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.boxShadow = 'none';
-                this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-            });
-        });
+      <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
 
-        // Add floating animation to skill tags
-        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
-            tag.style.animationDelay = `${index * 0.1}s`;
-            tag.style.animation = 'float 3s ease-in-out infinite';
-        });
+        <div class="row skills-content skills-animation">
 
-        // Add float keyframes
-        const floatKeyframes = `
-            @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-5px); }
-            }
-        `;
-        
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = floatKeyframes;
-        document.head.appendChild(styleSheet);
+          <div class="col-lg-6">
 
-        // Add click ripple effect to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    pointer-events: none;
-                `;
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
+            <div class="progress">
+              <span class="skill"><span>REACT</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 100%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
 
-        // Add ripple keyframes
-        const rippleKeyframes = `
-            @keyframes ripple {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-        `;
-        
-        const rippleStyleSheet = document.createElement('style');
-        rippleStyleSheet.textContent = rippleKeyframes;
-        document.head.appendChild(rippleStyleSheet);
+            <div class="progress">
+              <span class="skill"><span>NODE</span> <i class="val">90%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 90%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
 
-        // Performance optimization - pause animations when not visible
-        document.addEventListener('visibilitychange', () => {
-            const animations = document.querySelectorAll('*');
-            if (document.hidden) {
-                animations.forEach(el => {
-                    el.style.animationPlayState = 'paused';
-                });
-            } else {
-                animations.forEach(el => {
-                    el.style.animationPlayState = 'running';
-                });
-            }
-        });
-    </script>
+            <div class="progress">
+              <span class="skill"><span>JavaScript</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 75%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>EXPRESS JS</span> <i class="val">85%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 85%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
+
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="progress">
+              <span class="skill"><span>WEB 3 </span> <i class="val">82%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 82%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
+
+
+            <div class="progress">
+              <span class="skill"><span>PHP</span> <i class="val">95%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 80%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>CODEIGNITOR</span> <i class="val">98%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 90%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
+
+            <div class="progress">
+              <span class="skill"><span>MySQL</span> <i class="val">80%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                  style="width: 80%;">
+                </div>
+              </div>
+            </div><!-- End Skills Item -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Skills Section -->
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume section">
+
+      <!-- Section Title -->
+      <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Resume</h2>
+        <p>
+          My resume highlights my academic journey and professional experience, showcasing my growth from college to a
+          career in full-stack and Web3 development. It reflects my expertise in React, Node.js, PHP, and blockchain and
+          my contributions to building scalable digital solutions
+
+        </p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="resume-title">Education Sumary</h3>
+
+            <div class="resume-item pb-0">
+              <h4>Master of Technology (M.Tech)</h4>
+              <h5>2018 - 2020</h5>
+              <p><em>Sri Ram Group of Colleges, Gwalior - 475009</em></p>
+              <ul>
+                <li>Graduated with <strong>Honors</strong> in Compute Science and Engineering </li>
+                <li>Completed advanced coursework with focus on <strong>blockchain technology</strong> and
+                  <strong>React.js development</strong></li>
+                <li>Implemented practical projects in:
+                  <ul>
+                    <li>Blockchain architecture and smart contracts</li>
+                    <li>Modern web development with React.js</li>
+                  </ul>
+                </li>
+                <li>Applied academic knowledge to real-world technical challenges</li>
+              </ul>
+            </div><!-- End Education Item -->
+            <div class="resume-item pb-0">
+              <h4>Bachelor of Technology in Computer Science</h4>
+              <h5>2014 - 2018</h5>
+              <p><em>Rustamji Institute of Technology, Gwalior - 475009</em></p>
+              <ul>
+                <li>Graduated with <strong>Honors (8.0 CGPA)</strong></li>
+                <li>Developed technical expertise in:
+                  <ul>
+                    <li><strong>Web Development</strong> (HTML, React.js, PHP, Node.js)</li>
+                    <li>Software engineering fundamentals</li>
+                  </ul>
+                </li>
+                <li>Completed professional internship in software development</li>
+              </ul>
+            </div><!-- End Education Item -->
+
+            <div class="resume-item pb-0">
+              <h4>Higher Secondary Education (12th Grade)</h4>
+              <h5>2013 - 2014</h5>
+              <p><em>Gwalior, Madhya Pradesh</em></p>
+              <ul>
+                <li>Specialized in <strong>PCM (Physics, Chemistry, Mathematics)</strong></li>
+                <li>Qualified <strong>JEE Examination</strong> (India's premier engineering entrance test)</li>
+                <li>Developed strong analytical and problem-solving skills</li>
+              </ul>
+            </div><!-- End Education Item -->
+
+            <div class="resume-item pb-0">
+              <h4>High School Education (10th Grade)</h4>
+              <h5>2010 - 2011</h5>
+              <p><em>Gwalior, Madhya Pradesh</em></p>
+              <ul>
+                <li>Completed foundational education with distinction</li>
+                <li>Early demonstration of technical aptitude</li>
+              </ul>
+            </div><!-- End Education Item -->
+
+          </div>
+
+          <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="resume-title">Professional Experience | Full Stack &amp; Blockchain Developer</h3>
+
+            <div class="resume-item">
+              <h4>Project Manager &amp; Technical Lead</h4>
+              <h5>2022 - Present</h5>
+              <p><em>Sushain , Noida, India</em></p>
+              <ul>
+                <li>Architected and built a comprehensive healthcare platform from scratch, leading all phases from
+                  initial concept to production deployment.</li>
+                <li>Directly engaged with stakeholders to gather requirements and translated them into technical
+                  specifications using Figma for development teams.</li>
+                <li>Spearheaded full-stack development with React Native for mobile apps, Node.js/PHP backend, and
+                  React.js frontend.</li>
+                <li>Managed cross-functional teams of developers, SEO specialists, and designers to implement features
+                  and maintain platform stability.</li>
+                <li>Optimized system architecture to handle high traffic volumes while ensuring scalability and
+                  performance.</li>
+              </ul>
+            </div><!-- End Resume Item -->
+
+            <div class="resume-item">
+              <h4>Senior Software Developer</h4>
+              <h5>2019 - 2021</h5>
+              <p><em>AppTech, Gwalior, India</em></p>
+              <ul>
+                <li>Led end-to-end development of high-impact projects for brands like <strong>Lava Mobiles</strong> as
+                  a <strong>Senior Software Developer</strong>, ensuring seamless technical execution.</li>
+                <li>Collaborated closely with <strong>stakeholders</strong> to translate business requirements into
+                  scalable <strong>web applications</strong> using modern tech stacks.</li>
+                <li>Partnered with <strong>designers</strong> and <strong>marketing teams</strong> to align technical
+                  solutions with strategic business goals.</li>
+                <li>Developed <strong>Web3 project Canverse</strong>, building RESTful APIs to connect with
+                  <strong>smart contracts</strong> on the blockchain.</li>
+                <li>Spearheaded the project lifecycle from initial architecture to final <strong>production
+                    deployment</strong>, ensuring optimal performance and security.</li>
+              </ul>
+            </div><!-- End Resume Item -->
+
+
+            <div class="resume-item">
+              <h4>Junior Software Developer</h4>
+              <h5>2018 - 2019</h5>
+              <p><em>AppTech, Gwalior, India</em></p>
+              <ul>
+                <li>Developed and maintained <strong>PHP-based web applications</strong> as a <strong>Junior Software
+                    Developer</strong>, focusing on performance optimization.</li>
+                <li>Built <strong>RESTful APIs</strong> for mobile applications using <strong>PHP CodeIgniter</strong>,
+                  enhancing backend functionality.</li>
+                <li>Engineered an <strong>admin dashboard</strong> with <strong>React.js</strong> to streamline data
+                  management and reporting.</li>
+              </ul>
+            </div><!-- End Resume Item -->
+
+            <div class="resume-item">
+              <h4>Software Engineering Intern</h4>
+              <h5>2017 - 2018</h5>
+              <p><em>AppTech, Gwalior, India</em></p>
+              <ul>
+                <li>Implemented <strong>SEO strategies</strong> (on-page and off-page) to improve website visibility and
+                  organic traffic.</li>
+                <li>Contributed to <strong>API development</strong> using <strong>PHP CodeIgniter</strong>, supporting
+                  critical backend operations.</li>
+              </ul>
+            </div><!-- End Resume Item -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </section><!-- /Resume Section -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <p>I have worked on diverse projects, collaborating with top brands to deliver innovative solutions . My
+          portfolio showcases a blend of creativity, strategy, and results-driven execution
+          .</p>
+      </div>
+
+      <!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <!-- <li data-filter=".filter-app">Product</li> -->
+            <li data-filter=".filter-product">App</li>
+            <li data-filter=".filter-branding">Web</li>
+            <!-- <li data-filter=".filter-books">Books</li> -->
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200"
+            style="position: relative; height: 3926.83px;">
+
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>App 1</h4>
+                  <p> </p>
+                  <a href="assets/img/portfolio/app-1.jpg" title="App 1" data-gallery="portfolio-gallery-app"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div> -->
+            <!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 0px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/alpha.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 1</h4>
+                  <p>Alpha Launcher Prime Themes</p>
+                  <a href="assets/img/alpha.jpg" title="App 1" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=launcher.alpha.prime&amp;pcampaignid=web_share"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 271px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/png2jpg/avnto-removebg-preview.jpg" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 1</h4>
+                  <p> Avnet </p>
+                  <a href="assets/img/brands/png2jpg/avnto-removebg-preview.jpg" title="Web 1"
+                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
+                      class="bi bi-zoom-in"></i></a>
+                  <a href="https://news.avnet.com/media-center/logo/default.aspx" title="More Details"
+                    class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+
+
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Books 1</h4>
+                  <p></p>
+                  <a href="assets/img/portfolio/books-1.jpg" title="Branding 1" data-gallery="portfolio-gallery-book"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div> -->
+            <!-- End Portfolio Item -->
+
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/app-2.jpg" class="img-fluid  " alt="">
+                <div class="portfolio-info">
+                  <h4>App 2</h4>
+                  <p></p>
+                  <a href="assets/img/portfolio/app-2.jpg" title="App 2" data-gallery="portfolio-gallery-app"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div> -->
+            <!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 547px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/ARC-Launcher.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 2</h4>
+                  <p>ARC Launcher® 2024 &amp; 4D Themes</p>
+                  <a href="assets/img/ARC-Launcher.jpg" title="App 2" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=apptech.arc&amp;pcampaignid=web_share"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 818px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/png2jpg/frequency.jpg" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 2</h4>
+                  <p>Frequency</p>
+                  <a href="assets/img/brands/png2jpg/frequency.jpg" title="Web 2"
+                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
+                      class="bi bi-zoom-in"></i></a>
+                  <a href="https://www.frequency.com/" title="More Details" class="details-link" target="_blank"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 1070px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/png2jpg/T-mobile.jpg" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 3</h4>
+                  <p>t-Mobile</p>
+                  <a href="assets/img/brands/png2jpg/T-mobile.jpg" title="Web 3"
+                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
+                      class="bi bi-zoom-in"></i></a>
+                  <a href="https://www.t-mobile.com/" title="More Details" class="details-link" target="_blank"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- End Portfolio Item -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 1340.95px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/png2jpg/sunshine.jpg" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 4</h4>
+                  <p>Sunshine</p>
+                  <a href="assets/img/brands/png2jpg/sunshine.jpg" title="Web 4"
+                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
+                      class="bi bi-zoom-in"></i></a>
+                  <a href="https://sushainclinic.com/" title="More Details" class="details-link" target="_blank"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 1586.09px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/lava.png" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 5</h4>
+                  <p> Lava </p>
+                  <a href="assets/img/brands/lava.png" title="Web 5" data-gallery="portfolio-gallery-branding"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://www.lavamobiles.com/" title="More Details" class="details-link" target="_blank"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 1858.89px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/png2jpg/logo.jpg" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 6</h4>
+                  <p> Grab Space </p>
+                  <a href="assets/img/brands/png2jpg/logo.jpg" title="Web 6" data-gallery="portfolio-gallery-branding"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://grabspace.in/" title="More Details" class="details-link" target="_blank"> <i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- End Portfolio Item -->
+
+
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Books 2</h4>
+                  <p></p>
+                  <a href="assets/img/portfolio/books-2.jpg" title="Branding 2" data-gallery="portfolio-gallery-book"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div> -->
+            <!-- End Portfolio Item -->
+
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>App 3</h4>
+                  <p></p>
+                  <a href="assets/img/portfolio/app-3.jpg" title="App 3" data-gallery="portfolio-gallery-app"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div> -->
+            <!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 2073.67px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/Ares-Launcher.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 3</h4>
+                  <p>Ares Launcher -Themes Launcher</p>
+                  <a href="assets/img/Ares-Launcher.jpg" title="App 3" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=launcher.ares.free&amp;hl=en_IN"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 2344.67px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/4d-Wallpapers.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 4</h4>
+                  <p>4d Wallpapers and Live Themes</p>
+                  <a href="assets/img/4d-Wallpapers.jpg" title="App 4" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=com.apptech.pixel4d&amp;hl=en_IN"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 2615.67px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/Max-Launcher.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 5</h4>
+                  <p>Max Launcher Themes Wallpaper</p>
+                  <a href="assets/img/Max-Launcher.jpg" title="App 5" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=com.max.launcher&amp;hl=en_IN"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding"
+              style="position: absolute; left: 0px; top: 2886.67px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/brands/png2jpg/darshansankh.jpg" class="img-fluid brand-img" alt="">
+                <div class="portfolio-info">
+                  <h4>Web 7</h4>
+                  <p>Darshansankhala</p>
+                  <a href="assets/img/brands/png2jpg/darshansankh.jpg" title="Web 7"
+                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
+                      class="bi bi-zoom-in"></i></a>
+                  <a href="https://www.darshansankhala.com/" title="More Details" class="details-link"
+                    target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- End Portfolio Item -->
+
+
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 3113.83px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/Assistive-iTouch.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 6</h4>
+                  <p>Assistive iTouch OS 13.1</p>
+                  <a href="assets/img/Assistive-iTouch.jpg" title="App 6" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=apptech.itouch.lite&amp;hl=en_IN"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 3384.83px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/oS-X-14-Launcher.jpg" class="img-fluid product-img " alt="">
+                <div class="portfolio-info">
+                  <h4>App 7</h4>
+                  <p>oS X 14 Launcher and 4K Themes</p>
+                  <a href="assets/img/oS-X-14-Launcher.jpg" title="App 7" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=apptech.os.launcher&amp;hl=en_IN"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+
+
+
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product"
+              style="position: absolute; left: 0px; top: 3655.83px;">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/Win-10-Metro.jpg" class="img-fluid product-img" alt="">
+                <div class="portfolio-info">
+                  <h4>App 8</h4>
+                  <p>Win 10 Metro xLauncher</p>
+                  <a href="assets/img/Win-10-Metro.jpg" title="App 8" data-gallery="portfolio-gallery-product"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="https://play.google.com/store/apps/details?id=apptech.launcher.metrolauncher&amp;hl=en_IN"
+                    title="More Details" class="details-link" target="_blank"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div><!-- End Portfolio Item -->
+
+
+
+            <!-- End Portfolio Item -->
+
+
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
+              <div class="portfolio-content h-100">
+                <img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <h4>Books 3</h4>
+                  <p></p>
+                  <a href="assets/img/portfolio/books-3.jpg" title="Branding 3" data-gallery="portfolio-gallery-book"
+                    class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="portfolio-details.html" title="More Details" class="details-link"><i
+                      class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+            </div> -->
+            <!-- End Portfolio Item -->
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+        <h2>Contact</h2>
+        <!-- <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p> -->
+      </div><!-- End Section Title -->
+
+      <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-5">
+
+            <div class="info-wrap">
+              <div class="info-item d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h3>Address</h3>
+                  <p>Bohdapur, Gwalior, Madhya Pradesh, 474008 </p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-telephone flex-shrink-0"></i>
+                <div>
+                  <h3>Call Us</h3>
+                  <p>+91 90397 30708</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h3>Email Us</h3>
+                  <p>zuberqureshi95@gmail.com</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.524259869921!2d78.14923!3d26.2281396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c6615953d257%3A0x2f1ba6c8cdc94019!2sBahodapur%20Rd%2C%20Ekata%20Nagar%2C%20Anand%20Nagar%2C%20Gwalior%2C%20Madhya%20Pradesh%20474008!5e0!3m2!1sen!2sin!4v1676961268712!5m2!1sen!2sus"
+                frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <form action="forms/contact.php" method="post" class="php-email-form aos-init aos-animate"
+              data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <label for="name-field" class="pb-2">Your Name</label>
+                  <input type="text" name="name" id="name-field" class="form-control" required="">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email-field" class="pb-2">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="subject-field" class="pb-2">Subject</label>
+                  <input type="text" class="form-control" name="subject" id="subject-field" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <label for="message-field" class="pb-2">Message</label>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Zuber </strong> <span>All Rights Reserved</span>
+        </p>
+        <a href="zuber_tnc.pdf" target="_blank"> Term of Use </a> &amp; <a href="zuber_refund.pdf" target="_blank">
+          Refund Policy </a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center active"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+
+  <!-- Add this right before closing </body> tag -->
+  <a href="https://wa.me/919039730708" class="float-whatsapp" target="_blank" rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp">
+    <i class="bi bi-whatsapp"></i> <!-- Bootstrap Icons -->
+  </a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <style data-typed-js-cursor-css="true">
+    .typed-cursor {
+      opacity: 1;
+    }
+
+    .typed-cursor.typed-cursor--blink {
+      animation: typedjsBlink 0.7s infinite;
+      -webkit-animation: typedjsBlink 0.7s infinite;
+      animation: typedjsBlink 0.7s infinite;
+    }
+
+    @keyframes typedjsBlink {
+      50% {
+        opacity: 0.0;
+      }
+    }
+
+    @-webkit-keyframes typedjsBlink {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+
+
+
 </body>
+
 </html>

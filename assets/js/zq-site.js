@@ -198,4 +198,110 @@
     onFrameScroll();
     window.addEventListener("scroll", onFrameScroll, { passive: true });
   }
+
+  // Expertise cycle (3 interactive rings)
+  const expRoot = document.querySelector("[data-exp-cycle]");
+  if (expRoot) {
+    const tabs = [...expRoot.querySelectorAll("[data-exp-tab]")];
+    const panels = [...expRoot.querySelectorAll("[data-exp-panel]")];
+    const dots = [...expRoot.querySelectorAll("[data-exp-dot]")];
+    const hub = expRoot.querySelector("[data-exp-hub]");
+    const hubIcon = expRoot.querySelector("[data-exp-hub-icon]");
+    const hubTitle = expRoot.querySelector("[data-exp-hub-title]");
+    const hubKicker = hub ? hub.querySelector(".exp-hub-kicker") : null;
+    const progress = expRoot.querySelector("[data-exp-progress]");
+    const pauseBtn = expRoot.querySelector("[data-exp-pause]");
+    const pauseIcon = expRoot.querySelector("[data-exp-pause-icon]");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const meta = [
+      { title: "Project Domains", icon: "bi-buildings", kicker: "Cycle 01 / 03" },
+      { title: "Tech & Systems", icon: "bi-cpu", kicker: "Cycle 02 / 03" },
+      { title: "CTO Leadership", icon: "bi-people", kicker: "Cycle 03 / 03" },
+    ];
+
+    const CIRC = 2 * Math.PI * 128;
+    let index = 0;
+    let paused = false;
+    let timer = null;
+
+    const setProgress = (i) => {
+      if (!progress) return;
+      const segment = CIRC / 3;
+      progress.style.strokeDasharray = `${segment} ${CIRC}`;
+      progress.style.strokeDashoffset = String(-segment * i);
+    };
+
+    const go = (next, user = false) => {
+      index = ((next % meta.length) + meta.length) % meta.length;
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.classList.toggle("is-active", on);
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      panels.forEach((panel, i) => {
+        const on = i === index;
+        panel.classList.toggle("is-active", on);
+        if (on) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+      });
+      dots.forEach((dot, i) => dot.classList.toggle("is-active", i === index));
+
+      if (hub) hub.classList.add("is-switching");
+      const m = meta[index];
+      if (hubIcon) hubIcon.innerHTML = `<i class="bi ${m.icon}"></i>`;
+      if (hubTitle) hubTitle.textContent = m.title;
+      if (hubKicker) hubKicker.textContent = m.kicker;
+      setProgress(index);
+      window.setTimeout(() => hub && hub.classList.remove("is-switching"), 280);
+
+      if (user) restart();
+    };
+
+    const stop = () => {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const start = () => {
+      stop();
+      if (paused || reduce) return;
+      timer = window.setInterval(() => go(index + 1), 4800);
+    };
+
+    const restart = () => {
+      if (!paused) start();
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => go(Number(tab.getAttribute("data-exp-tab")), true));
+    });
+
+    const prev = expRoot.querySelector("[data-exp-prev]");
+    const next = expRoot.querySelector("[data-exp-next]");
+    if (prev) prev.addEventListener("click", () => go(index - 1, true));
+    if (next) next.addEventListener("click", () => go(index + 1, true));
+
+    if (pauseBtn) {
+      pauseBtn.addEventListener("click", () => {
+        paused = !paused;
+        pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+        if (pauseIcon) {
+          pauseIcon.className = paused ? "bi bi-play-fill" : "bi bi-pause-fill";
+        }
+        if (paused) stop();
+        else start();
+      });
+    }
+
+    expRoot.addEventListener("mouseenter", stop);
+    expRoot.addEventListener("mouseleave", () => {
+      if (!paused) start();
+    });
+
+    go(0);
+    start();
+  }
 })();

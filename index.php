@@ -111,6 +111,110 @@ require __DIR__ . '/includes/zq-boot.php';
       </div>
     </div>
 
+    <section class="section section-dark expertise-cycle" id="expertise" aria-labelledby="expertise-title">
+      <div class="container">
+        <div class="section-head reveal" style="max-width:40rem">
+          <p class="eyebrow">CTO-level depth</p>
+          <h2 id="expertise-title">Domains. Systems. Leadership.</h2>
+          <p class="lead">A quick cycle through the work that shapes my profile — industry projects, high-stakes tech stacks, and cross-team ownership at CTO scale.</p>
+        </div>
+
+        <div class="exp-cycle reveal" data-exp-cycle>
+          <div class="exp-orbit" aria-hidden="false">
+            <div class="exp-ring" data-exp-ring>
+              <svg class="exp-ring-svg" viewBox="0 0 320 320" aria-hidden="true">
+                <circle class="exp-ring-track" cx="160" cy="160" r="128" fill="none" />
+                <circle class="exp-ring-progress" data-exp-progress cx="160" cy="160" r="128" fill="none" />
+              </svg>
+            </div>
+
+            <div class="exp-hub" data-exp-hub>
+              <span class="exp-hub-icon" data-exp-hub-icon><i class="bi bi-buildings"></i></span>
+              <span class="exp-hub-kicker">Cycle 01 / 03</span>
+              <strong class="exp-hub-title" data-exp-hub-title>Project Domains</strong>
+            </div>
+
+            <div class="exp-nodes" role="tablist" aria-label="Expertise cycles">
+              <button type="button" class="exp-node is-active" role="tab" aria-selected="true" data-exp-tab="0" style="--a: -90deg">
+                <span class="exp-node-dot"><i class="bi bi-buildings"></i></span>
+                <span class="exp-node-label">Domains</span>
+              </button>
+              <button type="button" class="exp-node" role="tab" aria-selected="false" data-exp-tab="1" style="--a: 30deg">
+                <span class="exp-node-dot"><i class="bi bi-cpu"></i></span>
+                <span class="exp-node-label">Tech Stack</span>
+              </button>
+              <button type="button" class="exp-node" role="tab" aria-selected="false" data-exp-tab="2" style="--a: 150deg">
+                <span class="exp-node-dot"><i class="bi bi-people"></i></span>
+                <span class="exp-node-label">CTO Lead</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="exp-stage">
+            <div class="exp-panel is-active" role="tabpanel" data-exp-panel="0">
+              <p class="exp-panel-kicker"><i class="bi bi-briefcase"></i> Industry projects shipped</p>
+              <h3>Project domains I've built in</h3>
+              <p>End-to-end product and platform work across regulated and high-growth industries — not tutorials, real production systems.</p>
+              <div class="exp-tags">
+                <span class="exp-tag"><i class="bi bi-currency-rupee"></i> Fintech</span>
+                <span class="exp-tag"><i class="bi bi-link-45deg"></i> Blockchain / Web3</span>
+                <span class="exp-tag"><i class="bi bi-heart-pulse"></i> Healthcare</span>
+                <span class="exp-tag"><i class="bi bi-bag-check"></i> E-commerce</span>
+                <span class="exp-tag"><i class="bi bi-kanban"></i> CRM platforms</span>
+                <span class="exp-tag"><i class="bi bi-box-seam"></i> Warehouse systems</span>
+              </div>
+            </div>
+
+            <div class="exp-panel" role="tabpanel" data-exp-panel="1" hidden>
+              <p class="exp-panel-kicker"><i class="bi bi-hdd-network"></i> Systems &amp; architecture</p>
+              <h3>Tech stacks &amp; specialty systems</h3>
+              <p>The kind of build work that signals senior ownership — complex integrations, scale, payments, and real-time platforms.</p>
+              <div class="exp-tags">
+                <span class="exp-tag hot"><i class="bi bi-telephone-forward"></i> IVR calling systems</span>
+                <span class="exp-tag hot"><i class="bi bi-whatsapp"></i> WhatsApp payment gateway</span>
+                <span class="exp-tag hot"><i class="bi bi-diagram-3"></i> Microservices</span>
+                <span class="exp-tag hot"><i class="bi bi-lightning-charge"></i> Scalable systems</span>
+                <span class="exp-tag"><i class="bi bi-cloud"></i> Cloud &amp; DevOps</span>
+                <span class="exp-tag"><i class="bi bi-robot"></i> LLM / RAG / Agents</span>
+                <span class="exp-tag"><i class="bi bi-braces"></i> API platforms</span>
+                <span class="exp-tag"><i class="bi bi-phone"></i> Mobile + web apps</span>
+              </div>
+            </div>
+
+            <div class="exp-panel" role="tabpanel" data-exp-panel="2" hidden>
+              <p class="exp-panel-kicker"><i class="bi bi-award"></i> Cross-functional ownership</p>
+              <h3>CTO-level team leadership</h3>
+              <p>Not only code — full ownership of product delivery through engineering, growth, and creative functions.</p>
+              <div class="exp-tags">
+                <span class="exp-tag"><i class="bi bi-phone"></i> App development</span>
+                <span class="exp-tag"><i class="bi bi-code-slash"></i> Backend teams</span>
+                <span class="exp-tag"><i class="bi bi-window"></i> Frontend teams</span>
+                <span class="exp-tag"><i class="bi bi-megaphone"></i> Marketing teams</span>
+                <span class="exp-tag"><i class="bi bi-search"></i> SEO ownership</span>
+                <span class="exp-tag"><i class="bi bi-palette"></i> Graphics / creative</span>
+                <span class="exp-tag"><i class="bi bi-people"></i> Cross-team delivery</span>
+                <span class="exp-tag"><i class="bi bi-clipboard-check"></i> Product &amp; roadmap</span>
+              </div>
+            </div>
+
+            <div class="exp-controls">
+              <button type="button" class="exp-ctrl" data-exp-prev aria-label="Previous cycle"><i class="bi bi-chevron-left"></i></button>
+              <div class="exp-dots" aria-hidden="true">
+                <span class="is-active" data-exp-dot="0"></span>
+                <span data-exp-dot="1"></span>
+                <span data-exp-dot="2"></span>
+              </div>
+              <button type="button" class="exp-ctrl" data-exp-next aria-label="Next cycle"><i class="bi bi-chevron-right"></i></button>
+              <button type="button" class="exp-pause" data-exp-pause aria-pressed="false" title="Pause auto-cycle">
+                <i class="bi bi-pause-fill" data-exp-pause-icon></i>
+                <span>Auto</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="about-preview" style="padding-top:2.5rem;background:#fff">
       <div class="container grid-2" style="align-items:center">
         <div class="reveal">
